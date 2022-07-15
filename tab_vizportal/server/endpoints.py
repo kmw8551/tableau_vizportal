@@ -77,7 +77,7 @@ class Endpoint(object):
                     headers=None,
                     method=None,
                     params=None,
-                    cookies=None):
+                    cookies=None) -> requests.Response:
 
 
         request_url = base_url + '/' + api_url
@@ -85,4 +85,18 @@ class Endpoint(object):
         payload= json.dumps({"method": api_method, "params" : params}) if method is None else json.dumps({"method": method, "params" : params})
 
         return requests.request(method=http_method, url=request_url, headers=headers, data=payload, cookies=cookies)
-        # return requests.request(method=http_method, url=request_url, headers=headers, data=payload)
+    
+
+    def vizportal_api(self, api_url, new_params) -> requests.Response:
+        self.base_headers["Host"] = self.host
+        self.base_headers["Origin"] = self.base_url
+        self.base_headers["X-XSRF-TOKEN"] = self.session.cookies['XSRF-TOKEN']
+
+        resp_session = self.api_request(base_url=self.base_url,
+                                        http_method='POST',
+                                        api_url=api_url,
+                                        headers=self.base_headers,
+                                        params=new_params,
+                                        cookies=self.session.cookies)
+
+        return resp_session
