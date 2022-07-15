@@ -31,12 +31,12 @@ Tableau Vizportal : Application Server (VizPortal) handles the web application a
 
   
 ## Purpose of this Repo - What's the Difference???
-In this Repo, I added "Data Alert" Part . For those looking for an additional api methods, please refer to the link below for more details  
+In this Repo, I added "Data Alert" Part. For those looking for an additional api methods, please refer to the link below for more details  
 [other API Methods](https://viziblydiffrnt.github.io/blog/2017/01/26/documenting-tableau-vizportal-api)
 
 
+## Usage
 
-
-
+examples.py -> Check this Py file!
 
 
