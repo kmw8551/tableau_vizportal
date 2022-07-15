@@ -6,6 +6,8 @@
 -----------------------------------
 [![License](https://img.shields.io/github/license/kmw8551/tableau_vizportal)](https://github.com/kmw8551/tableau_vizportal/blob/master/LICENSE)
 [![](https://tokei.rs/b1/github.com/kmw8551/tableau_vizportal)](https://github.com/kmw8551/tableau_vizportal)
+[![Python 3.6+](https://img.shields.io/badge/python-3.6+-3776AB?logo=Python&logoColor=FFFFFF&style=flat-square)](https://www.python.org/)
+[![Visitor count](https://shields-io-visitor-counter.herokuapp.com/badge?page=kmw8551.tableau_vizportal&color=1D70B8&logo=GitHub&logoColor=FFFFFF&style=flat-square)](https://github.com/kmw8551/tableau_vizportal)
 
 ## Author
 
