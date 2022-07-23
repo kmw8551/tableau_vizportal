@@ -7,12 +7,17 @@ from server.api.api_factory import APIFactory
 
 logging.basicConfig(level=logging.INFO)
 
+
+# example using  Environment variable
+# up to your choice, JSON, ini, yaml ...
 tab_id = os.environ['TABLEAU_ID']
 tab_passwd = os.environ['TABLEAU_PWD']
 tab_server = os.environ['TABLEAU_SERVER']
+tab_site = os.environ['TABLEAU_SITE']
+
 
 # First, Login VizPortal
-auth = Auth(tab_id, tab_passwd, tab_server)
+auth = Auth(tab_id, tab_passwd, tab_server, tab_site)
 resp_session, cookies, xsrf_token = auth.auth_login()
 
 # Basic Info - You can find the headers option in the Network tab in Developer's console in Chrome
@@ -48,5 +53,8 @@ response_view = view.get_views(operator_params2)
 if status_code_view:= response_view.status_code == 200:
     print("View Method working!!!")
 
+
 # Close Session
 auth.auth_logout()
+
+
