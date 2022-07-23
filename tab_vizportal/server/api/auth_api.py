@@ -5,17 +5,19 @@ from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_v1_5
 from requests import RequestException ,  HTTPError
 from tab_vizportal.server.endpoints import Endpoint
+from tab_vizportal.server.api.site_api import Sites
 from urllib.parse import urlparse
 
 logger = logging.getLogger("tableau.vizportal.login")
 
 class Auth(Endpoint):
 
-    def __init__(self, tableau_id, tableau_passwd, base_url) :
+    def __init__(self, tableau_id, tableau_passwd, base_url, site_name) :
 
         self._tableau_id = tableau_id
         self._tableau_passwd = tableau_passwd
         self.base_url = base_url
+        self.site_name = site_name
 
         domain = urlparse(base_url).netloc
         super().__init__(host=domain)
@@ -61,9 +63,10 @@ class Auth(Endpoint):
                                         api_url= "vizportal/api/web/v1/login",
                                         headers=headers,
                                         params=params)
-        self.session = resp_session
 
-        print(resp_session.content)
+        # print(resp_session.json())
+
+        self.session = resp_session
 
         print("status code = %s" % resp_session.status_code)
         if int(resp_session.status_code) not in [200, 201, 204, 206]:
@@ -77,7 +80,22 @@ class Auth(Endpoint):
         xsrf_token = resp_session.cookies["XSRF-TOKEN"]
         logging.info("Session Cookies : {}".format(self._cookies))
 
-        return (resp_session, cookies, xsrf_token)
+        new_header= headers
+        new_header['X-XSRF-TOKEN'] = xsrf_token
+        operator_params = {
+            "urlName": f"{self.site_name}"
+
+        }
+
+        resp_session_after_switch_site = self.api_request(base_url=self.base_url,
+                                         http_method='POST',
+                                         api_url="vizportal/api/web/v1/switchSite",
+                                         headers=new_header,
+                                         params=operator_params,
+                                         cookies=cookies)
+
+
+        return resp_session_after_switch_site
 
     def auth_logout(self):
         self.session.close()

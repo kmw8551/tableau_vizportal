@@ -6,6 +6,9 @@ from requests import Session
 from tab_vizportal.server.endpoints import Endpoint
 from tab_vizportal.server.api.data_alert_api import DataAlert
 from tab_vizportal.server.api.view_api import View
+from tab_vizportal.server.api.workbook_api import Workbook
+from tab_vizportal.server.api.session_api import Sessions
+from tab_vizportal.server.api.site_api import Sites
 from urllib.parse import urlparse
 
 
@@ -21,8 +24,15 @@ class APIFactory:
         elif name == "View":
             return View(session, base_url, base_headers)
 
-        else:
-            raise Exception("Method Not Found")
+        elif name == "Workbook":
+            return Workbook(session, base_url, base_headers)
+
+        elif name == "Sessions":
+            return Sessions(session, base_url, base_headers)
+
+        elif name == "Sites":
+            return Sites(session, base_url, base_headers)
+
 
 
 
