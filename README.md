@@ -34,9 +34,29 @@ Tableau Vizportal : Application Server (VizPortal) handles the web application a
 In this Repo, I added "Data Alert" Part. For those looking for an additional api methods, please refer to the link below for more details  
 [other API Methods](https://viziblydiffrnt.github.io/blog/2017/01/26/documenting-tableau-vizportal-api)
 
-
+---  
 ## Usage
 
 examples.py -> Check this Py file!
+
+
+### Explanation  
+To Understand this lib, The First thing you need to know is, "Login Flow"  
+<br>
+Tableau Login Flow(both Web UI and API)  
+<br>
+**[Web]**  
+<span style='background-color: #dcffe4'>Login -> Select site -> Home</span>    
+
+**[API]**  :arrow_right: Our Process  
+<span style='background-color: #dcffe4'>Get PublicKey -> Encrypt password -> Login to Server using publick key ID and encrypted password</span> -> <span style='background-color: #ffdce0'>using SwitchSite API to switch site, else move to 'Default'</span>   
+
+<br>
+This Lib has 2 major parts : Authentication and API Factory  
+
+Here, "Endpoint" Class is the base class, and all APIs inherit "Endpoint" class
+
+
+
 
 
